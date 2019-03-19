@@ -1,20 +1,20 @@
 'use strict';
 
-var authenticator = require('./authenticator');
+var totpAuthenticator = require('./totp-authenticator');
 
-var formattedKey = authenticator.generateKey();
+var formattedKey = totpAuthenticator.generateKey();
 console.log(formattedKey);
 // "acqo ua72 d3yf a4e5 uorx ztkh j2xl 3wiz"
 
-var formattedToken = authenticator.generateToken(formattedKey);
+var formattedToken = totpAuthenticator.generateToken(formattedKey);
 console.log(formattedToken);
 // "957 124"
 
-var result = authenticator.verifyToken(formattedKey, formattedToken);
+var result = totpAuthenticator.verifyToken(formattedKey, formattedToken);
 console.log(result);
 // { delta: 0 }
 
-result = authenticator.verifyToken(formattedKey, '000-000');
+result = totpAuthenticator.verifyToken(formattedKey, '000-000');
 console.log(result);
 // null
 

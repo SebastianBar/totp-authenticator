@@ -1,5 +1,4 @@
-Node.js Authenticator
-=====================
+# totp-authenticator
 
 *A fork of coolaj86's [authenticator](https://git.coolaj86.com/coolaj86/node-authenticator.js)*
 
@@ -26,7 +25,7 @@ Install
 
 **Node.js api**
 ```bash
-npm install authenticator --save
+npm install totp-authenticator --save
 ```
 
 Usage
@@ -34,21 +33,21 @@ Usage
 
 **Node.js api**
 ```javascript
-const authenticator = require('authenticator');
+const totpAuthenticator = require('totp-uthenticator');
 
-const formattedKey = authenticator.generateKey();
+const formattedKey = totpAuthenticator.generateKey();
 // "acqo ua72 d3yf a4e5 uorx ztkh j2xl 3wiz"
 
-const formattedToken = authenticator.generateToken(formattedKey);
+const formattedToken = totpAuthenticator.generateToken(formattedKey);
 // "957 124"
 
-authenticator.verifyToken(formattedKey, formattedToken);
+totpAuthenticator.verifyToken(formattedKey, formattedToken);
 // { delta: 0 }
 
-authenticator.verifyToken(formattedKey, '000 000');
+totpAuthenticator.verifyToken(formattedKey, '000 000');
 // null
 
-authenticator.generateTotpUri(formattedKey, "john.doe@email.com", "ACME Co", 'SHA1', 6, 30);
+totpAuthenticator.generateTotpUri(formattedKey, "john.doe@email.com", "ACME Co", 'SHA1', 6, 30);
 // otpauth://totp/ACME%20Co:john.doe@email.com?secret=HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ&issuer=ACME%20Co&algorithm=SHA1&digits=6&period=30
 ```
 
