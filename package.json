@@ -1,17 +1,14 @@
 {
-  "name": "authenticator",
-  "version": "1.1.5",
-  "description": "Two- / Multi- Factor Authenication (2FA / MFA) for node.js",
-  "main": "authenticator.js",
+  "name": "totp-authenticator",
+  "version": "1.0.0",
+  "description": "Typescript-friendly, TOTP-based 2FA/MFA for Node.js",
+  "main": "totp-authenticator.js",
   "scripts": {
     "test": "node example.js"
   },
-  "bin": {
-    "authenticator": "bin/authenticator.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://git.coolaj86.com/coolaj86/node-authenticator.js.git"
+    "url": "git+https://github.com/SebastianBar/totp-authenticator.git"
   },
   "keywords": [
     "authenticator",
@@ -26,16 +23,16 @@
     "time-based",
     "authy",
     "google",
-    "microsoft"
+    "microsoft",
+    "typescript"
   ],
-  "author": "AJ ONeal <coolaj86@gmail.com> (https://coolaj86.com/)",
+  "author": "Sebastián Barrenechea <sebastian@barrenechea.cl> (https://www.barrenechea.cl/)",
   "license": "(MIT or Apache-2.0)",
   "bugs": {
-    "url": "https://git.coolaj86.com/coolaj86/node-authenticator.js/issues"
+    "url": "https://github.com/SebastianBar/totp-authenticator/issues"
   },
-  "homepage": "https://git.coolaj86.com/coolaj86/node-authenticator.js#readme",
+  "homepage": "https://github.com/SebastianBar/totp-authenticator#readme",
   "dependencies": {
-    "authenticator-cli": "^1.0.5",
     "notp": "^2.0.3",
     "thirty-two": "0.0.2"
   }

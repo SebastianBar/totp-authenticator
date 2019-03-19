@@ -1,9 +1,9 @@
 Node.js Authenticator
 =====================
 
-| Sponsored by [ppl](https://ppl.family)
+*A fork of coolaj86's [authenticator](https://git.coolaj86.com/coolaj86/node-authenticator.js)*
 
-Two- and Multi- Factor Authenication (2FA / MFA) for node.js
+Typescript-friendly, TOTP-based 2FA/MFA for Node.js
 
 ![](https://blog.authy.com/assets/posts/authenticator.png)
 
@@ -21,40 +21,25 @@ This module uses [`notp`](https://github.com/guyht/notp) which implements `TOTP`
 (the *Authenticator* standard), which is based on `HOTP` [(RFC 4226)](https://www.ietf.org/rfc/rfc4226.txt)
 to provide codes that are exactly compatible with all other *Authenticator* apps and services that use them.
 
-Browser & Commandline Authenticator
----------------------
-
-You may also be interested in
-
-* [Browser Authenticator](https://git.coolaj86.com/coolaj86/browser-authenticator) over at <https://git.coolaj86.com/coolaj86/browser-authenticator>
-* [Commandline Authenticator](https://git.coolaj86.com/coolaj86/authenticator-cli) over at <https://git.coolaj86.com/coolaj86/authenticator-cli>
-
 Install
 =====
 
-**node.js api**
+**Node.js api**
 ```bash
 npm install authenticator --save
-```
-
-**command line**
-```bash
-npm install authenticator-cli --global
 ```
 
 Usage
 =====
 
-**node.js api**
+**Node.js api**
 ```javascript
-'use strict';
+const authenticator = require('authenticator');
 
-var authenticator = require('authenticator');
-
-var formattedKey = authenticator.generateKey();
+const formattedKey = authenticator.generateKey();
 // "acqo ua72 d3yf a4e5 uorx ztkh j2xl 3wiz"
 
-var formattedToken = authenticator.generateToken(formattedKey);
+const formattedToken = authenticator.generateToken(formattedKey);
 // "957 124"
 
 authenticator.verifyToken(formattedKey, formattedToken);
@@ -64,17 +49,7 @@ authenticator.verifyToken(formattedKey, '000 000');
 // null
 
 authenticator.generateTotpUri(formattedKey, "john.doe@email.com", "ACME Co", 'SHA1', 6, 30);
-//
 // otpauth://totp/ACME%20Co:john.doe@email.com?secret=HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ&issuer=ACME%20Co&algorithm=SHA1&digits=6&period=30
-```
-
-**command line**
-```
-# see help
-authenticator --help
-
-# generate a key and display qr code
-authenticator --qr
 ```
 
 API
@@ -146,10 +121,4 @@ TODO: should this library replace 0 with o, 1 with l (or I?), 8 with b, 9 with g
 The window is set to +/- 1, meaning each token is valid for a total of 90 seconds
 (-30 seconds, +0 seconds, and +30 seconds)
 to account for time drift (which should be very rare for mobile devices)
-and humans who are handicapped or otherwise struggle with quick fine motor skills (like my grandma).
-
-
-Why not SpeakEasy?
-------------------
-
-It doesn't use native node crypto and there are open security issues which have been left unaddressed.
+and humans who are handicapped or otherwise struggle with quick fine motor skills.
