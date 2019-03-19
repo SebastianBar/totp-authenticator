@@ -31,4 +31,4 @@ export function verifyToken(key: string, token: string): VerifiedToken | null;
  * @param digits (Optional) Amount of digits that the TOTP tokens will have. Default: `6`
  * @param period (Optional) Time duration (in seconds) of a TOTP token. Default: `30`
  */
-export function generateTotpUri(secret: string, accountName: string, issuer: string?, algo: string?, digits: number?, period: number?): string;
+export function generateTotpUri(secret: string, accountName: string, issuer?: string, algo?: string, digits?: number, period?: number): string;
