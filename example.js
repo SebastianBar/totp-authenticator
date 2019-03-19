@@ -18,7 +18,7 @@ result = totpAuthenticator.verifyToken(formattedKey, '000-000');
 console.log(result);
 // null
 
-// result will allways be one of
+// result will always be one of
 // (failure) null
 // (success) { delta: -1 }, { delta: 0 }, or { delta: 1 }
 // delta lets you know which way time drift is occurring
