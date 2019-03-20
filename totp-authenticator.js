@@ -85,7 +85,7 @@ function verifyToken(key, token) {
  * @param {number?} digits Amount of digits that the TOTP tokens will have. Default: 6
  * @param {number?} period Time duration (in seconds) of a TOTP token. Default: 30
  */
-function generateTotpUri(secret, accountName, issuer, algo, digits, period) {
+function generateTotpUri(secret, accountName, issuer, algorithm, digits, period) {
   /**
    * Full OTPAUTH URI spec as explained at https://github.com/google/google-authenticator/wiki/Key-Uri-Format
    */
@@ -95,8 +95,7 @@ function generateTotpUri(secret, accountName, issuer, algo, digits, period) {
     + '&issuer=' + encodeURIComponent(issuer || '')
     + '&algorithm=' + (algorithm || 'SHA1')
     + '&digits=' + (digits || 6)
-    + '&period=' + (period || 30)
-    ;
+    + '&period=' + (period || 30);
 
   return uri;
 }
