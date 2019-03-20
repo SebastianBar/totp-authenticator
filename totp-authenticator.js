@@ -1,13 +1,15 @@
 'use strict';
 var crypto = require('crypto');
 var b32 = require('thirty-two');
-var notp = require('notp');
+var { totp } = require('notp');
 
 /**
  * Generate a key
  */
 function generateOtpKey() {
-  // 20 cryptographically random binary bytes (160-bit key)
+  /**
+   * 20 cryptographically random binary bytes (160-bit key)
+   */
   var key = crypto.randomBytes(20);
 
   return key;
@@ -18,10 +20,14 @@ function generateOtpKey() {
  * @param {Buffer} buf Buffer containing random bytes
  */
 function encodePrivateKey(buf) {
-  // 32 ascii characters without trailing '='s
+  /**
+   * 32 ASCII characters without trailing '='s
+   */
   var base32 = b32.encode(buf).toString('utf8').replace(/=/g, '');
 
-  // lowercase with a space every 4 characters
+  /**
+   * Lowercase with a space every 4 characters
+   */
   var key = base32.toLowerCase().replace(/(\w{4})/g, "$1 ").trim();
 
   return key;
@@ -36,7 +42,9 @@ function generateKey() {
  * @param {string} key Key to decode
  */
 function decodePrivateKey(key) {
-  // decode base32 google auth key to binary
+  /**
+   * Decode base32 private key to binary
+   */
   var unformatted = key.replace(/\W+/g, '').toUpperCase();
   var bin = b32.decode(unformatted);
 
@@ -50,7 +58,7 @@ function decodePrivateKey(key) {
 function generateToken(key) {
   var bin = decodePrivateKey(key);
 
-  return notp.totp.gen(bin);
+  return totp.gen(bin);
 }
 
 /**
@@ -60,11 +68,12 @@ function generateToken(key) {
  */
 function verifyToken(key, token) {
   var bin = decodePrivateKey(key);
+  var formattedToken = token.replace(/\W+/g, '');
 
-  token = token.replace(/\W+/g, '');
-
-  // window is +/- 1 period of 30 seconds
-  return notp.totp.verify(token, bin, { window: 1, time: 30 });
+  /**
+   * window is +/- 1 period of 30 seconds
+   */
+  return totp.verify(formattedToken, bin, { window: 1, time: 30 });
 }
 
 /**
@@ -77,8 +86,10 @@ function verifyToken(key, token) {
  * @param {number?} period Time duration (in seconds) of a TOTP token. Default: 30
  */
 function generateTotpUri(secret, accountName, issuer, algo, digits, period) {
-  // Full OTPAUTH URI spec as explained at https://github.com/google/google-authenticator/wiki/Key-Uri-Format
-  return 'otpauth://totp/'
+  /**
+   * Full OTPAUTH URI spec as explained at https://github.com/google/google-authenticator/wiki/Key-Uri-Format
+   */
+  var uri = 'otpauth://totp/'
     + encodeURI(issuer || '') + ':' + encodeURI(accountName || '')
     + '?secret=' + secret.replace(/[\s\.\_\-]+/g, '').toUpperCase()
     + '&issuer=' + encodeURIComponent(issuer || '')
@@ -86,9 +97,13 @@ function generateTotpUri(secret, accountName, issuer, algo, digits, period) {
     + '&digits=' + (digits || 6)
     + '&period=' + (period || 30)
     ;
+
+  return uri;
 }
 
-module.exports.generateKey = generateKey;
-module.exports.generateToken = generateToken;
-module.exports.verifyToken = verifyToken;
-module.exports.generateTotpUri = generateTotpUri;
+module.exports = {
+  generateKey,
+  generateToken,
+  verifyToken,
+  generateTotpUri
+}
