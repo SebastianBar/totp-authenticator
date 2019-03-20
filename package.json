@@ -2,9 +2,9 @@
   "name": "totp-authenticator",
   "version": "1.0.0",
   "description": "Typescript-friendly, TOTP-based 2FA/MFA for Node.js",
-  "main": "totp-authenticator.js",
+  "main": "./src/totp-authenticator.js",
   "scripts": {
-    "test": "node totp-authenticator.test.js"
+    "test": "node ./tests/totp-authenticator.test.js"
   },
   "repository": {
     "type": "git",

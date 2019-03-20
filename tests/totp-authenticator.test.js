@@ -1,5 +1,5 @@
 'use strict';
-var totpAuthenticator = require('./totp-authenticator');
+var totpAuthenticator = require('../src/totp-authenticator');
 
 var exitStatus = 0;
 function runTest(validation) {
