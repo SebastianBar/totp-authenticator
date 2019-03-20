@@ -24,6 +24,8 @@
     "authy",
     "google",
     "microsoft",
+    "totp",
+    "hotp",
     "typescript"
   ],
   "author": "Sebastián Barrenechea <sebastian@barrenechea.cl> (https://www.barrenechea.cl/)",

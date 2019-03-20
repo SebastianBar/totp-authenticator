@@ -33,7 +33,7 @@ function encodePrivateKey(buf) {
   return key;
 }
 
-function generateKey() {
+function generatePrivateKey() {
   return encodePrivateKey(generateOtpKey());
 }
 
@@ -71,7 +71,7 @@ function verifyToken(key, token) {
   var formattedToken = token.replace(/\W+/g, '');
 
   /**
-   * window is +/- 1 period of 30 seconds
+   * Window is +/- 1 period of 30 seconds
    */
   return totp.verify(formattedToken, bin, { window: 1, time: 30 });
 }
@@ -100,9 +100,7 @@ function generateTotpUri(secret, accountName, issuer, algorithm, digits, period)
   return uri;
 }
 
-module.exports = {
-  generateKey,
-  generateToken,
-  verifyToken,
-  generateTotpUri
-}
+module.exports.generatePrivateKey = generatePrivateKey;
+module.exports.generateToken = generateToken;
+module.exports.verifyToken = verifyToken;
+module.exports.generateTotpUri = generateTotpUri;
