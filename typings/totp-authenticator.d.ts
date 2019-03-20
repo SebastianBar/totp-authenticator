@@ -1,3 +1,9 @@
+/**
+ * This object represents a successful token being verified.
+ * The possible values for delta are: `-1`, `0` or `1`.
+ * 
+ * delta let you know which way time drift is occurring
+ */
 interface VerifiedToken {
   delta: number;
 }

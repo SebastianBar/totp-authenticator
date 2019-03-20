@@ -4,7 +4,7 @@
   "description": "Typescript-friendly, TOTP-based 2FA/MFA for Node.js",
   "main": "totp-authenticator.js",
   "scripts": {
-    "test": "node example.js"
+    "test": "node totp-authenticator.test.js"
   },
   "repository": {
     "type": "git",
